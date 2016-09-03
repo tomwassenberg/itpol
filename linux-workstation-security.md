@@ -61,16 +61,11 @@ Remember, these are only guidelines. If you feel these priority levels do not
 reflect your project's commitment to security, you should adjust them as you
 see fit.
 
-## Choosing the right hardware
-
-We do not mandate that our admins use a specific vendor or a specific model, so
-this section addresses core considerations when choosing a work system.
-
 ### Checklist
 
-- [ ] System supports SecureBoot _(ESSENTIAL)_
-- [ ] System has no firewire, thunderbolt or ExpressCard ports _(NICE)_
-- [ ] System has a TPM chip _(NICE)_
+- [x] System supports SecureBoot _(ESSENTIAL)_
+- [x] System has no firewire, thunderbolt or ExpressCard ports _(NICE)_
+- [x] System has a TPM chip _(NICE)_
 
 ### Considerations
 
@@ -87,15 +82,6 @@ Alternatively, you may set up [Anti Evil Maid][1] which offers a more
 wholesome protection against the type of attacks that SecureBoot is supposed
 to prevent, but it will require more effort to set up and maintain.
 
-#### Firewire, thunderbolt, and ExpressCard ports
-
-Firewire is a standard that, by design, allows any connecting device full
-direct memory access to your system ([see Wikipedia][2]). Thunderbolt and
-ExpressCard are guilty of the same, though some later implementations of
-Thunderbolt attempt to limit the scope of memory access. It is best if the
-system you are getting has none of these ports, but it is not critical, as
-they usually can be turned off via UEFI or disabled in the kernel itself.
-
 #### TPM Chip
 
 Trusted Platform Module (TPM) is a crypto chip bundled with the motherboard
@@ -111,9 +97,9 @@ with OS installation.
 
 ### Checklist
 
-- [ ] UEFI boot mode is used (not legacy BIOS) _(ESSENTIAL)_
+- [x] UEFI boot mode is used (not legacy BIOS) _(ESSENTIAL)_
 - [ ] Password is required to enter UEFI configuration _(ESSENTIAL)_
-- [ ] SecureBoot is enabled _(ESSENTIAL)_
+- [x] SecureBoot is enabled _(ESSENTIAL)_
 - [ ] UEFI-level password is required to boot the system _(NICE)_
 
 ### Considerations
@@ -151,11 +137,11 @@ what you should consider when picking a distribution to use.
 ### Checklist
 
 - [ ] Has a robust MAC/RBAC implementation (SELinux/AppArmor/GrSecurity) _(ESSENTIAL)_
-- [ ] Publishes security bulletins _(ESSENTIAL)_
-- [ ] Provides timely security patches _(ESSENTIAL)_
-- [ ] Provides cryptographic verification of packages _(ESSENTIAL)_
-- [ ] Fully supports UEFI and SecureBoot _(ESSENTIAL)_
-- [ ] Has robust native full disk encryption support _(ESSENTIAL)_
+- [x] Publishes security bulletins _(ESSENTIAL)_
+- [x] Provides timely security patches _(ESSENTIAL)_
+- [x] Provides cryptographic verification of packages _(ESSENTIAL)_
+- [x] Fully supports UEFI and SecureBoot _(ESSENTIAL)_
+- [x] Has robust native full disk encryption support _(ESSENTIAL)_
 
 ### Considerations
 
@@ -180,60 +166,18 @@ there are few or no externally listening daemons, and where user-run
 applications pose the highest risk, GrSecurity/PaX will offer more security
 benefits than just SELinux.
 
-#### Distro security bulletins
-
-Most of the widely used distributions have a mechanism to deliver security
-bulletins to their users, but if you are fond of something esoteric, check
-whether the developers have a documented mechanism of alerting the users about
-security vulnerabilities and patches. Absence of such mechanism is a major
-warning sign that the distribution is not mature enough to be considered for a
-primary admin workstation.
-
-#### Timely and trusted security updates
-
-Most of the widely used distributions deliver regular security updates, but is
-worth checking to ensure that critical package updates are provided in a
-timely fashion. Avoid using spin-offs and "community rebuilds" for this
-reason, as they routinely delay security updates due to having to wait for the
-upstream distribution to release it first.
-
-These days, it is hard to find a distribution that does not use cryptographic
-signatures on packages, updates metadata, or both. That being said, fairly
-widely used distributions have been known to go for years before introducing
-this basic security measure (Arch, I'm looking at you), so this is something
-worth checking.
-
-#### Distros supporting UEFI and SecureBoot
-
-Check that the distribution supports UEFI and SecureBoot. Find out whether it
-requires importing an extra key or whether it signs its boot kernels with a key
-already trusted by systems manufacturers (e.g. via an agreement with
-Microsoft). Some distributions do not support UEFI/SecureBoot but offer
-alternatives to ensure tamper-proof or tamper-evident boot environments
-([Qubes-OS][3] uses Anti Evil Maid, mentioned earlier). If a distribution
-doesn't support SecureBoot and has no mechanisms to prevent boot-level attacks,
-look elsewhere.
-
-#### Full disk encryption
-
-Full disk encryption is a requirement for securing data at rest, and is
-supported by most distributions. As an alternative, systems with
-self-encrypting hard drives may be used (normally implemented via the on-board
-TPM chip) and offer comparable levels of security plus faster operation, but at
-a considerably higher cost.
-
 ## Distro installation guidelines
 
 All distributions are different, but here are general guidelines:
 
 ### Checklist
 
-- [ ] Use full disk encryption (LUKS) with a robust passphrase _(ESSENTIAL)_
-- [ ] Make sure swap is also encrypted _(ESSENTIAL)_
+- [x] Use full disk encryption (LUKS) with a robust passphrase _(ESSENTIAL)_
+- [x] Make sure swap is also encrypted _(ESSENTIAL)_
 - [ ] Require a password to edit bootloader (can be same as LUKS) _(ESSENTIAL)_
 - [ ] Set up a robust root password (can be same as LUKS) _(ESSENTIAL)_
-- [ ] Use an unprivileged account, part of administrators group _(ESSENTIAL)_
-- [ ] Set up a robust user-account password, different from root _(ESSENTIAL)_
+- [x] Use an unprivileged account, part of administrators group _(ESSENTIAL)_
+- [x] Set up a robust user-account password, different from root _(ESSENTIAL)_
 
 ### Considerations
 
@@ -328,10 +272,9 @@ document such as this one. However, here are some steps you should take:
 
 ### Checklist
 
-- [ ] Globally disable firewire and thunderbolt modules _(ESSENTIAL)_
 - [ ] Check your firewalls to ensure all incoming ports are filtered _(ESSENTIAL)_
 - [ ] Make sure root mail is forwarded to an account you check _(ESSENTIAL)_
-- [ ] Set up an automatic OS update schedule, or update reminders _(ESSENTIAL)_
+- [x] Set up an automatic OS update schedule, or update reminders _(ESSENTIAL)_
 - [ ] Check to ensure sshd service is disabled by default _(NICE)_
 - [ ] Configure the screensaver to auto-lock after a period of inactivity _(NICE)_
 - [ ] Set up logwatch _(NICE)_
@@ -339,17 +282,6 @@ document such as this one. However, here are some steps you should take:
 - [ ] Install an Intrusion Detection System _(NICE)_
 
 ### Considerations
-
-#### Blacklisting modules
-
-To blacklist a firewire and thunderbolt modules, add the following lines to a
-file in `/etc/modprobe.d/blacklist-dma.conf`:
-
-    blacklist firewire-core
-    blacklist thunderbolt
-
-The modules will be blacklisted upon reboot. It doesn't hurt doing this even if
-you don't have these ports (but it doesn't do anything either).
 
 #### Root mail
 
@@ -381,22 +313,6 @@ You can always start it temporarily if you need to use it.
 In general, your system shouldn't have any listening ports apart from
 responding to ping. This will help safeguard you against network-level 0-day
 exploits.
-
-#### Automatic updates or notifications
-
-It is recommended to turn on automatic updates, unless you have a very good
-reason not to do so, such as fear that an automatic update would render your
-system unusable (it's happened in the past, so this fear is not unfounded). At
-the very least, you should enable automatic notifications of available updates.
-Most distributions already have this service automatically running for you, so
-chances are you don't have to do anything. Consult your distribution
-documentation to find out more.
-
-You should apply all outstanding errata as soon as possible, even if something
-isn't specifically labeled as "security update" or has an associated CVE code.
-All bugs have the potential of being security bugs and erring on the side of
-newer, unknown bugs is _generally_ a safer strategy than sticking with old,
-known ones.
 
 #### Watching logs
 
@@ -433,7 +349,6 @@ manner.
 ### Checklist
 
 - [ ] Set up encrypted workstation backups to external storage _(ESSENTIAL)_
-- [ ] Use zero-knowledge backup tools for off-site/cloud backups _(NICE)_
 
 ### Considerations
 
@@ -459,146 +374,12 @@ otherwise security sensitive data to snooping hands -- especially if you keep
 that storage media in the same bag with your laptop or in your office desk
 drawer.
 
-#### Selective zero-knowledge backups off-site
-
-Off-site backups are also extremely important and can be done either to your
-employer, if they offer space for it, or to a cloud provider. You can set up a
-separate duplicity/deja-dup profile to only include most important files in
-order to avoid transferring huge amounts of data that you don't really care to
-back up off-site (internet cache, music, downloads, etc).
-
-Alternatively, you can use a zero-knowledge backup tool, such as
-[SpiderOak][5], which offers an excellent Linux GUI tool and has additional
-useful features such as synchronizing content between multiple systems and
-platforms.
-
 ## Best practices
 
 What follows is a curated list of best practices that we think you should
 adopt. It is most certainly non-exhaustive, but rather attempts to offer
 practical advice that strikes a workable balance between security and overall
 usability.
-
-### Graphical environment
-
-The venerable X protocol was conceived and implemented for a wholly different
-era of personal computing and lacks important security features that should be
-considered essential on a networked workstation. To give a few examples:
-
-- Any X application has access to full screen contents
-- Any X application can register to receive all keystrokes, regardless into
-  which window they are typed
-
-A sufficiently severe browser vulnerability means attackers get automatic
-access to what is effectively a builtin keylogger and screen recorder and
-can watch and capture everything you type into your root terminal sessions.
-
-You should strongly consider switching to a more modern platform like Wayland,
-even if this means using many of your existing applications through an X11
-protocol wrapper. With Fedora starting to default to Wayland for all
-applications, we can hope that most software will soon stop requiring the
-legacy X11 layer.
-
-### Browsers
-
-There is no question that the web browser will be the piece of software with
-the largest and the most exposed attack surface on your system. It is a tool
-written specifically to download and execute untrusted, frequently hostile
-code. It attempts to shield you from this danger by employing multiple
-mechanisms such as sandboxes and code sanitization, but they have all been
-previously defeated on multiple occasions. You should learn to approach
-browsing websites as the most insecure activity you'll engage in on any given
-day.
-
-There are several ways you can reduce the impact of a compromised browser, but
-the truly effective ways will require significant changes in the way you
-operate your workstation.
-
-#### 1: Use two different browsers _(ESSENTIAL)_
-
-This is the easiest to do, but only offers minor security benefits. Not all
-browser compromises give an attacker full unfettered access to your system --
-sometimes they are limited to allowing one to read local browser storage,
-steal active sessions from other tabs, capture input entered into the browser,
-etc. Using two different browsers, one for work/high security sites, and
-another for everything else will help prevent minor compromises from giving
-attackers access to the whole cookie jar. The main inconvenience will be the
-amount of memory consumed by two different browser processes.
-
-Here's what we recommend:
-
-##### Firefox for work and high security sites
-
-Use Firefox to access work-related sites, where extra care should be taken to
-ensure that data like cookies, sessions, login information, keystrokes, etc,
-should most definitely not fall into attackers' hands. You should NOT use
-this browser for accessing any other sites except select few.
-
-You should install the following Firefox add-ons:
-
-- [ ] NoScript _(ESSENTIAL)_
-  - NoScript prevents active content from loading, except from user
-    whitelisted domains. It is a great hassle to use with your default browser
-    (though offers really good security benefits), so we recommend only
-    enabling it on the browser you use to access work-related sites.
-
-- [ ] Privacy Badger _(ESSENTIAL)_
-  - EFF's Privacy Badger will prevent most external trackers and ad platforms
-    from being loaded, which will help avoid compromises on these tracking
-    sites from affecting your browser (trackers and ad sites are very commonly
-    targeted by attackers, as they allow rapid infection of thousands of
-    systems worldwide).
-
-- [ ] HTTPS Everywhere _(ESSENTIAL)_
-  - This EFF-developed Add-on will ensure that most of your sites are accessed
-    over a secure connection, even if a link you click is using http:// (great
-    to avoid a number of attacks, such as [SSL-strip][7]).
-
-- [ ] Certificate Patrol _(NICE)_
-  - This tool will alert you if the site you're accessing has recently changed
-    their TLS certificates -- especially if it wasn't nearing expiration dates
-    or if it is now using a different certification authority. It helps
-    alert you if someone is trying to man-in-the-middle your connection,
-    but generates a lot of benign false-positives.
-
-You should leave Firefox as your default browser for opening links, as
-NoScript will prevent most active content from loading or executing.
-
-##### Chrome/Chromium for everything else
-
-Chromium developers are ahead of Firefox in adding a lot of nice security
-features (at least [on Linux][6]), such as seccomp sandboxes, kernel user
-namespaces, etc, which act as an added layer of isolation between the sites
-you visit and the rest of your system. Chromium is the upstream open-source
-project, and Chrome is Google's proprietary binary build based on it (insert
-the usual paranoid caution about not using it for anything you don't want
-Google to know about).
-
-It is recommended that you install **Privacy Badger** and **HTTPS Everywhere**
-extensions in Chrome as well and give it a distinct theme from Firefox to
-indicate that this is your "untrusted sites" browser.
-
-#### 2: Use firejail _(ESSENTIAL)_
-
-[Firejail][19] is a project that uses Linux namespaces and seccomp-bpf to
-create a sandbox around Linux applications. It is an excellent way to help
-build additional protection between the browser and the rest of your system.
-You can use Firejail to create separate isolated instances of Firefox to
-use for different purposes -- for work, for personal but trusted sites (such
-as banking), and one more for casual browsing (social media, etc).
-
-Firejail is most effective on Wayland, unless you use X11-isolation mechanisms
-(the `--x11` flag). To start using Firejail with Firefox, please refer to the
-documentation provided by the project:
-
-- [Firefox Sandboxing Guide][20]
-
-#### 3: Fully separate your work and play environments via virtualization _(PARANOID)_
-
-See [QubesOS project][3], which strives to provide a "reasonably secure"
-workstation environment via compartmentalizing your applications into separate
-fully isolated VMs. You may also investigate [SubgraphOS][24] that achieves
-similar goals using container technology (currently in Alpha).
 
 ### Use Fido U2F for website 2-factor authentication
 
@@ -624,10 +405,9 @@ application to your USB token.
 
 #### Checklist
 
-- [ ] Use a password manager _(ESSENTIAL)_
-- [ ] Use unique, randomly generated passwords on unrelated sites _(ESSENTIAL)_
-- [ ] Use a password manager that supports team sharing _(NICE)_
-- [ ] Use a separate password manager for non-website accounts _(NICE)_
+- [x] Use a password manager _(ESSENTIAL)_
+- [x] Use unique, randomly generated passwords on unrelated sites _(ESSENTIAL)_
+- [x] Use a password manager that supports team sharing _(NICE)_
 
 #### Considerations
 
@@ -685,7 +465,7 @@ to ensure that your private keys are well protected against theft.
 
 #### Checklist
 
-- [ ] Strong passphrases are used to protect private keys _(ESSENTIAL)_
+- [x] Strong passphrases are used to protect private keys _(ESSENTIAL)_
 - [ ] PGP Master key is stored on removable storage _(NICE)_
 - [ ] Auth, Sign and Encrypt Subkeys are stored on a smartcard device _(NICE)_
 - [ ] SSH is configured to use PGP Auth key as ssh private key _(NICE)_
