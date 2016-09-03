@@ -63,9 +63,9 @@ see fit.
 
 ### Checklist
 
-- [ ] System supports SecureBoot _(ESSENTIAL)_
-- [ ] System has no firewire, thunderbolt or ExpressCard ports _(NICE)_
-- [ ] System has a TPM chip _(NICE)_
+- [x] System supports SecureBoot _(ESSENTIAL)_
+- [x] System has no firewire, thunderbolt or ExpressCard ports _(NICE)_
+- [x] System has a TPM chip _(NICE)_
 
 ### Considerations
 
@@ -97,9 +97,10 @@ with OS installation.
 
 ### Checklist
 
-- [ ] UEFI boot mode is used (not legacy BIOS) _(ESSENTIAL)_
+- [x] UEFI boot mode is used (not legacy BIOS) _(ESSENTIAL)_
 - [ ] Password is required to enter UEFI configuration _(ESSENTIAL)_
-- [ ] SecureBoot is enabled _(ESSENTIAL)_
+- [x] SecureBoot is enabled _(ESSENTIAL)_
+- [ ] UEFI-level password is required to boot the system _(NICE)_
 
 ### Considerations
 
@@ -129,11 +130,11 @@ what you should consider when picking a distribution to use.
 ### Checklist
 
 - [ ] Has a robust MAC/RBAC implementation (SELinux/AppArmor/GrSecurity) _(ESSENTIAL)_
-- [ ] Publishes security bulletins _(ESSENTIAL)_
-- [ ] Provides timely security patches _(ESSENTIAL)_
-- [ ] Provides cryptographic verification of packages _(ESSENTIAL)_
-- [ ] Fully supports UEFI and SecureBoot _(ESSENTIAL)_
-- [ ] Has robust native full disk encryption support _(ESSENTIAL)_
+- [x] Publishes security bulletins _(ESSENTIAL)_
+- [x] Provides timely security patches _(ESSENTIAL)_
+- [x] Provides cryptographic verification of packages _(ESSENTIAL)_
+- [x] Fully supports UEFI and SecureBoot _(ESSENTIAL)_
+- [x] Has robust native full disk encryption support _(ESSENTIAL)_
 
 ### Considerations
 
@@ -164,11 +165,12 @@ All distributions are different, but here are general guidelines:
 
 ### Checklist
 
-- [ ] Use full disk encryption (LUKS) with a robust passphrase _(ESSENTIAL)_
-- [ ] Make sure swap is also encrypted _(ESSENTIAL)_
+- [x] Use full disk encryption (LUKS) with a robust passphrase _(ESSENTIAL)_
+- [x] Make sure swap is also encrypted _(ESSENTIAL)_
+- [ ] Require a password to edit bootloader (can be same as LUKS) _(ESSENTIAL)_
 - [ ] Set up a robust root password (can be same as LUKS) _(ESSENTIAL)_
-- [ ] Use an unprivileged account, part of administrators group _(ESSENTIAL)_
-- [ ] Set up a robust user-account password, different from root _(ESSENTIAL)_
+- [x] Use an unprivileged account, part of administrators group _(ESSENTIAL)_
+- [x] Set up a robust user-account password, different from root _(ESSENTIAL)_
 
 ### Considerations
 
@@ -265,7 +267,7 @@ document such as this one. However, here are some steps you should take:
 
 - [ ] Check your firewalls to ensure all incoming ports are filtered _(ESSENTIAL)_
 - [ ] Make sure root mail is forwarded to an account you check _(ESSENTIAL)_
-- [ ] Set up an automatic OS update schedule, or update reminders _(ESSENTIAL)_
+- [x] Set up an automatic OS update schedule, or update reminders _(ESSENTIAL)_
 - [ ] Check to ensure sshd service is disabled by default _(NICE)_
 - [ ] Configure the screensaver to auto-lock after a period of inactivity _(NICE)_
 
@@ -302,6 +304,65 @@ In general, your system shouldn't have any listening ports apart from
 responding to ping. This will help safeguard you against network-level 0-day
 exploits.
 
+#### Watching logs
+
+You should have a keen interest in what happens on your system. For this
+reason, you should install `logwatch` and configure it to send nightly activity
+reports of everything that happens on your system. This won't prevent a
+dedicated attacker, but is a good safety-net feature to have in place.
+
+Note, that many systemd distros will no longer automatically install a syslog
+server that `logwatch` needs (due to systemd relying on its own journal), so
+you will need to install and enable `rsyslog` to make sure your `/var/log` is
+not empty before logwatch will be of any use.
+
+#### Rkhunter and IDS
+
+Installing `rkhunter` and an intrusion detection system (IDS) like `aide` or
+`tripwire` will not be that useful unless you actually understand how they work
+and take the necessary steps to set them up properly (such as, keeping the
+databases on external media, running checks from a trusted environment,
+remembering to refresh the hash databases after performing system updates and
+configuration changes, etc). If you are not willing to take these steps and
+adjust how you do things on your own workstation, these tools will introduce
+hassle without any tangible security benefit.
+
+We do recommend that you install `rkhunter` and run it nightly. It's fairly
+easy to learn and use, and though it will not deter a sophisticated attacker,
+it may help you catch your own mistakes.
+
+## Personal workstation backups
+
+Workstation backups tend to be overlooked or done in a haphazard, often unsafe
+manner.
+
+### Checklist
+
+- [ ] Set up encrypted workstation backups to external storage _(ESSENTIAL)_
+
+### Considerations
+
+#### Full encrypted backups to external storage
+
+It is handy to have an external hard drive where one can dump full backups
+without having to worry about such things like bandwidth and upstream speeds
+(in this day and age most providers still offer dramatically asymmetric
+upload/download speeds). Needless to say, this hard drive needs to be in itself
+encrypted (again, via LUKS), or you should use a backup tool that creates
+encrypted backups, such as `duplicity` or its GUI companion, `deja-dup`. I
+recommend using the latter with a good randomly generated passphrase, stored
+in a safe offline place. If you travel with your laptop, leave this drive at
+home to have something to come back to in case your laptop is lost or stolen.
+
+In addition to your home directory, you should also back up `/etc` and
+`/var/log` for various forensic purposes.
+
+Above all, avoid copying your home directory onto any unencrypted storage, even
+as a quick way to move your files around between systems, as you will most
+certainly forget to erase it once you're done, exposing potentially private or
+otherwise security sensitive data to snooping hands -- especially if you keep
+that storage media in the same bag with your laptop.
+
 ## Best practices
 
 What follows is a curated list of best practices that we think you should
@@ -333,9 +394,9 @@ application to your USB token.
 
 #### Checklist
 
-- [ ] Use a password manager _(ESSENTIAL)_
-- [ ] Use unique, randomly generated passwords on unrelated sites _(ESSENTIAL)_
-- [ ] Use a password manager that supports team sharing _(NICE)_
+- [x] Use a password manager _(ESSENTIAL)_
+- [x] Use unique passwords on unrelated sites _(ESSENTIAL)_
+- [x] Use a password manager that supports team sharing _(NICE)_
 
 #### Considerations
 
@@ -393,7 +454,7 @@ to ensure that your private keys are well protected against theft.
 
 #### Checklist
 
-- [ ] Strong passphrases are used to protect private keys _(ESSENTIAL)_
+- [x] Strong passphrases are used to protect private keys _(ESSENTIAL)_
 - [ ] PGP Master key is stored on removable storage _(NICE)_
 - [ ] Auth, Sign and Encrypt Subkeys are stored on a smartcard device _(NICE)_
 - [ ] SSH is configured to use PGP Auth key as ssh private key _(NICE)_
