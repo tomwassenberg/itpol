@@ -100,7 +100,6 @@ with OS installation.
 - [x] UEFI boot mode is used (not legacy BIOS) _(ESSENTIAL)_
 - [ ] Password is required to enter UEFI configuration _(ESSENTIAL)_
 - [x] SecureBoot is enabled _(ESSENTIAL)_
-- [ ] UEFI-level password is required to boot the system _(NICE)_
 
 ### Considerations
 
@@ -120,13 +119,6 @@ SecureBoot key that would allow you to boot the distro. Many distributions have
 partnered with Microsoft to sign their released kernels with a key that is
 already recognized by most system manufacturers, therefore saving you the
 trouble of having to deal with key importing.
-
-As an extra measure, before someone is allowed to even get to the boot
-partition and try some badness there, let's make them enter a password. This
-password should be different from your UEFI management password, in order to
-prevent shoulder-surfing. If you shut down and start a lot, you may choose to
-not bother with this, as you will already have to enter a LUKS passphrase and
-this will save you a few extra keystrokes.
 
 ## Distro choice considerations
 
@@ -174,8 +166,7 @@ All distributions are different, but here are general guidelines:
 
 - [x] Use full disk encryption (LUKS) with a robust passphrase _(ESSENTIAL)_
 - [x] Make sure swap is also encrypted _(ESSENTIAL)_
-- [ ] Require a password to edit bootloader (can be same as LUKS) _(ESSENTIAL)_
-- [ ] Set up a robust root password (can be same as LUKS) _(ESSENTIAL)_
+- [x] Set up a robust root password (can be same as LUKS) _(ESSENTIAL)_
 - [x] Use an unprivileged account, part of administrators group _(ESSENTIAL)_
 - [x] Set up a robust user-account password, different from root _(ESSENTIAL)_
 
@@ -273,10 +264,10 @@ document such as this one. However, here are some steps you should take:
 ### Checklist
 
 - [ ] Check your firewalls to ensure all incoming ports are filtered _(ESSENTIAL)_
-- [ ] Make sure root mail is forwarded to an account you check _(ESSENTIAL)_
+- [x] Make sure root mail is forwarded to an account you check _(ESSENTIAL)_
 - [x] Set up an automatic OS update schedule, or update reminders _(ESSENTIAL)_
-- [ ] Check to ensure sshd service is disabled by default _(NICE)_
-- [ ] Configure the screensaver to auto-lock after a period of inactivity _(NICE)_
+- [x] Check to ensure sshd service is disabled by default _(NICE)_
+- [x] Configure the screensaver to auto-lock after a period of inactivity _(NICE)_
 - [ ] Set up logwatch _(NICE)_
 - [ ] Install and use rkhunter _(NICE)_
 - [ ] Install an Intrusion Detection System _(NICE)_
@@ -340,39 +331,6 @@ hassle without any tangible security benefit.
 We do recommend that you install `rkhunter` and run it nightly. It's fairly
 easy to learn and use, and though it will not deter a sophisticated attacker,
 it may help you catch your own mistakes.
-
-## Personal workstation backups
-
-Workstation backups tend to be overlooked or done in a haphazard, often unsafe
-manner.
-
-### Checklist
-
-- [ ] Set up encrypted workstation backups to external storage _(ESSENTIAL)_
-
-### Considerations
-
-#### Full encrypted backups to external storage
-
-It is handy to have an external hard drive where one can dump full backups
-without having to worry about such things like bandwidth and upstream speeds
-(in this day and age most providers still offer dramatically asymmetric
-upload/download speeds). Needless to say, this hard drive needs to be in itself
-encrypted (again, via LUKS), or you should use a backup tool that creates
-encrypted backups, such as `duplicity` or its GUI companion, `deja-dup`. I
-recommend using the latter with a good randomly generated passphrase, stored
-in a safe offline place. If you travel with your laptop, leave this drive at
-home to have something to come back to in case your laptop is lost or stolen.
-
-In addition to your home directory, you should also back up `/etc` and
-`/var/log` for various forensic purposes.
-
-Above all, avoid copying your home directory onto any unencrypted storage, even
-as a quick way to move your files around between systems, as you will most
-certainly forget to erase it once you're done, exposing potentially private or
-otherwise security sensitive data to snooping hands -- especially if you keep
-that storage media in the same bag with your laptop or in your office desk
-drawer.
 
 ## Best practices
 
