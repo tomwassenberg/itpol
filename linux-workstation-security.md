@@ -417,10 +417,8 @@ maximize your workstation security.
 
 #### Checklist
 
-- [ ] Make sure SELinux is enforcing on your workstation _(ESSENTIAL)_
-- [ ] Never blindly run `audit2allow -M`, always check _(ESSENTIAL)_
-- [ ] Never `setenforce 0` _(NICE)_
-- [ ] Switch your account to SELinux user `staff_u` _(NICE)_
+- [x] Make sure SELinux is enforcing on your workstation _(ESSENTIAL)_
+- [x] Never `setenforce 0` _(NICE)_
 
 #### Considerations
 
@@ -466,51 +464,6 @@ policy. Once that is done and you see no new AVC denials, you can remove that
 domain from permissive by running:
 
     semanage permissive -d gpg_pinentry_t
-
-##### Use your workstation as SELinux role staff_r
-
-SELinux comes with a native implementation of roles that prohibit or grant
-certain privileges based on the role associated with the user account. As an
-administrator, you should be using the `staff_r` role, which will restrict
-access to many configuration and other security-sensitive files, unless you
-first perform `sudo`.
-
-By default, accounts are created as `unconfined_r` and most applications you
-execute will run unconfined, without any (or with only very few) SELinux
-constraints. To switch your account to the `staff_r` role, run the following
-command:
-
-    usermod -Z staff_u [username]
-
-You should log out and log back in to enable the new role, at which point if
-you run `id -Z`, you'll see:
-
-    staff_u:staff_r:staff_t:s0-s0:c0.c1023
-
-When performing `sudo`, you should remember to add an extra flag to tell
-SELinux to transition to the "sysadmin" role. The command you want is:
-
-    sudo -i -r sysadm_r
-
-At which point `id -Z` will show:
-
-    staff_u:sysadm_r:sysadm_t:s0-s0:c0.c1023
-
-**WARNING**: you should be comfortable using `ausearch` and `audit2allow`
-before you make this switch, as it's possible some of your applications will
-no longer work when you're running as role `staff_r`. At the time of writing,
-the following popular applications are known to not work under `staff_r`
-without policy tweaks:
-
-- Chrome/Chromium
-- Skype
-- VirtualBox
-
-To switch back to `unconfined_r`, run the following command:
-
-    usermod -Z unconfined_u [username]
-
-and then log out and back in to get back into the comfort zone.
 
 ## Further reading
 
