@@ -128,7 +128,7 @@ what you should consider when picking a distribution to use.
 
 ### Checklist
 
-- [ ] Has a robust MAC/RBAC implementation (SELinux/AppArmor/GrSecurity) _(ESSENTIAL)_
+- [x] Has a robust MAC/RBAC implementation (SELinux/AppArmor/GrSecurity) _(ESSENTIAL)_
 - [x] Publishes security bulletins _(ESSENTIAL)_
 - [x] Provides timely security patches _(ESSENTIAL)_
 - [x] Provides cryptographic verification of packages _(ESSENTIAL)_
@@ -263,14 +263,11 @@ document such as this one. However, here are some steps you should take:
 
 ### Checklist
 
-- [ ] Check your firewalls to ensure all incoming ports are filtered _(ESSENTIAL)_
+- [x] Check your firewalls to ensure all incoming ports are filtered _(ESSENTIAL)_
 - [x] Make sure root mail is forwarded to an account you check _(ESSENTIAL)_
 - [x] Set up an automatic OS update schedule, or update reminders _(ESSENTIAL)_
 - [x] Check to ensure sshd service is disabled by default _(NICE)_
 - [x] Configure the screensaver to auto-lock after a period of inactivity _(NICE)_
-- [ ] Set up logwatch _(NICE)_
-- [ ] Install and use rkhunter _(NICE)_
-- [ ] Install an Intrusion Detection System _(NICE)_
 
 ### Considerations
 
@@ -304,33 +301,6 @@ You can always start it temporarily if you need to use it.
 In general, your system shouldn't have any listening ports apart from
 responding to ping. This will help safeguard you against network-level 0-day
 exploits.
-
-#### Watching logs
-
-You should have a keen interest in what happens on your system. For this
-reason, you should install `logwatch` and configure it to send nightly activity
-reports of everything that happens on your system. This won't prevent a
-dedicated attacker, but is a good safety-net feature to have in place.
-
-Note, that many systemd distros will no longer automatically install a syslog
-server that `logwatch` needs (due to systemd relying on its own journal), so
-you will need to install and enable `rsyslog` to make sure your `/var/log` is
-not empty before logwatch will be of any use.
-
-#### Rkhunter and IDS
-
-Installing `rkhunter` and an intrusion detection system (IDS) like `aide` or
-`tripwire` will not be that useful unless you actually understand how they work
-and take the necessary steps to set them up properly (such as, keeping the
-databases on external media, running checks from a trusted environment,
-remembering to refresh the hash databases after performing system updates and
-configuration changes, etc). If you are not willing to take these steps and
-adjust how you do things on your own workstation, these tools will introduce
-hassle without any tangible security benefit.
-
-We do recommend that you install `rkhunter` and run it nightly. It's fairly
-easy to learn and use, and though it will not deter a sophisticated attacker,
-it may help you catch your own mistakes.
 
 ## Best practices
 
