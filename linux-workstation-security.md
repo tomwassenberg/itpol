@@ -98,7 +98,7 @@ with OS installation.
 ### Checklist
 
 - [x] UEFI boot mode is used (not legacy BIOS) _(ESSENTIAL)_
-- [ ] Password is required to enter UEFI configuration _(ESSENTIAL)_
+- [x] Password is required to enter UEFI configuration _(ESSENTIAL)_
 - [x] SecureBoot is enabled _(ESSENTIAL)_
 
 ### Considerations
