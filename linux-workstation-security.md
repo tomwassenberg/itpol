@@ -394,8 +394,8 @@ to ensure that your private keys are well protected against theft.
 #### Checklist
 
 - [x] Strong passphrases are used to protect private keys _(ESSENTIAL)_
-- [ ] PGP Master key is stored on removable storage _(NICE)_
-- [ ] Auth, Sign and Encrypt Subkeys are stored on a smartcard device _(NICE)_
+- [x] PGP Master key is stored on removable storage _(NICE)_
+- [x] Auth, Sign and Encrypt Subkeys are stored on a smartcard device _(NICE)_
 - [ ] SSH is configured to use PGP Auth key as ssh private key _(NICE)_
 
 #### Considerations
