@@ -104,7 +104,6 @@ All distributions are different, but here are general guidelines:
 ### Checklist
 
 - [ ] Use full disk encryption (LUKS) with a robust passphrase _(ESSENTIAL)_
-- [ ] Make sure swap is also encrypted _(ESSENTIAL)_
 - [ ] Set up a robust root password (can be same as LUKS) _(ESSENTIAL)_
 - [ ] Use an unprivileged account, part of administrators group _(ESSENTIAL)_
 - [ ] Set up a robust user-account password, different from root _(ESSENTIAL)_
@@ -202,6 +201,7 @@ document such as this one. However, here are some steps you should take:
 - [ ] Check your firewalls to ensure all incoming ports are filtered _(ESSENTIAL)_
 - [ ] Make sure root mail is forwarded to an account you check _(ESSENTIAL)_
 - [ ] Set up an automatic OS update schedule, or update reminders _(ESSENTIAL)_
+- [ ] Disable ability to log in as root via ssh _(ESSENTIAL)_
 
 ### Considerations
 
@@ -226,19 +226,6 @@ What follows is a curated list of best practices that we think you should
 adopt. It is most certainly non-exhaustive, but rather attempts to offer
 practical advice that strikes a workable balance between security and overall
 usability.
-
-### Securing SSH and PGP private keys
-
-Personal encryption keys, including SSH and PGP private keys, are going to be
-the most prized items on your workstation -- something the attackers will be
-most interested in obtaining, as that would allow them to further attack your
-infrastructure or impersonate you to other admins. You should take extra steps
-to ensure that your private keys are well protected against theft.
-
-#### Checklist
-
-- [ ] Strong passphrases are used to protect private keys _(ESSENTIAL)_
-- [ ] SSH is configured to use PGP Auth key as ssh private key _(NICE)_
 
 ### SELinux on the workstation
 
