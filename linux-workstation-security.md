@@ -63,9 +63,9 @@ see fit.
 
 ### Checklist
 
-- [x] System supports SecureBoot _(ESSENTIAL)_
-- [x] System has no firewire, thunderbolt or ExpressCard ports _(NICE)_
-- [x] System has a TPM chip _(NICE)_
+- [ ] System supports SecureBoot _(ESSENTIAL)_
+- [ ] System has no firewire, thunderbolt or ExpressCard ports _(NICE)_
+- [ ] System has a TPM chip _(NICE)_
 
 ### Considerations
 
@@ -97,9 +97,9 @@ with OS installation.
 
 ### Checklist
 
-- [x] UEFI boot mode is used (not legacy BIOS) _(ESSENTIAL)_
+- [ ] UEFI boot mode is used (not legacy BIOS) _(ESSENTIAL)_
 - [ ] Password is required to enter UEFI configuration _(ESSENTIAL)_
-- [x] SecureBoot is enabled _(ESSENTIAL)_
+- [ ] SecureBoot is enabled _(ESSENTIAL)_
 
 ### Considerations
 
@@ -129,11 +129,11 @@ what you should consider when picking a distribution to use.
 ### Checklist
 
 - [ ] Has a robust MAC/RBAC implementation (SELinux/AppArmor/GrSecurity) _(ESSENTIAL)_
-- [x] Publishes security bulletins _(ESSENTIAL)_
-- [x] Provides timely security patches _(ESSENTIAL)_
-- [x] Provides cryptographic verification of packages _(ESSENTIAL)_
-- [x] Fully supports UEFI and SecureBoot _(ESSENTIAL)_
-- [x] Has robust native full disk encryption support _(ESSENTIAL)_
+- [ ] Publishes security bulletins _(ESSENTIAL)_
+- [ ] Provides timely security patches _(ESSENTIAL)_
+- [ ] Provides cryptographic verification of packages _(ESSENTIAL)_
+- [ ] Fully supports UEFI and SecureBoot _(ESSENTIAL)_
+- [ ] Has robust native full disk encryption support _(ESSENTIAL)_
 
 ### Considerations
 
@@ -164,11 +164,11 @@ All distributions are different, but here are general guidelines:
 
 ### Checklist
 
-- [x] Use full disk encryption (LUKS) with a robust passphrase _(ESSENTIAL)_
-- [x] Make sure swap is also encrypted _(ESSENTIAL)_
-- [x] Set up a robust root password (can be same as LUKS) _(ESSENTIAL)_
-- [x] Use an unprivileged account, part of administrators group _(ESSENTIAL)_
-- [x] Set up a robust user-account password, different from root _(ESSENTIAL)_
+- [ ] Use full disk encryption (LUKS) with a robust passphrase _(ESSENTIAL)_
+- [ ] Make sure swap is also encrypted _(ESSENTIAL)_
+- [ ] Set up a robust root password (can be same as LUKS) _(ESSENTIAL)_
+- [ ] Use an unprivileged account, part of administrators group _(ESSENTIAL)_
+- [ ] Set up a robust user-account password, different from root _(ESSENTIAL)_
 
 ### Considerations
 
@@ -264,13 +264,10 @@ document such as this one. However, here are some steps you should take:
 ### Checklist
 
 - [ ] Check your firewalls to ensure all incoming ports are filtered _(ESSENTIAL)_
-- [x] Make sure root mail is forwarded to an account you check _(ESSENTIAL)_
-- [x] Set up an automatic OS update schedule, or update reminders _(ESSENTIAL)_
-- [x] Check to ensure sshd service is disabled by default _(NICE)_
-- [x] Configure the screensaver to auto-lock after a period of inactivity _(NICE)_
-- [ ] Set up logwatch _(NICE)_
-- [ ] Install and use rkhunter _(NICE)_
-- [ ] Install an Intrusion Detection System _(NICE)_
+- [ ] Make sure root mail is forwarded to an account you check _(ESSENTIAL)_
+- [ ] Set up an automatic OS update schedule, or update reminders _(ESSENTIAL)_
+- [ ] Check to ensure sshd service is disabled by default _(NICE)_
+- [ ] Configure the screensaver to auto-lock after a period of inactivity _(NICE)_
 
 ### Considerations
 
@@ -363,9 +360,9 @@ application to your USB token.
 
 #### Checklist
 
-- [x] Use a password manager _(ESSENTIAL)_
-- [x] Use unique passwords on unrelated sites _(ESSENTIAL)_
-- [x] Use a password manager that supports team sharing _(NICE)_
+- [ ] Use a password manager _(ESSENTIAL)_
+- [ ] Use unique passwords on unrelated sites _(ESSENTIAL)_
+- [ ] Use a password manager that supports team sharing _(NICE)_
 
 #### Considerations
 
@@ -423,7 +420,7 @@ to ensure that your private keys are well protected against theft.
 
 #### Checklist
 
-- [x] Strong passphrases are used to protect private keys _(ESSENTIAL)_
+- [ ] Strong passphrases are used to protect private keys _(ESSENTIAL)_
 - [ ] PGP Master key is stored on removable storage _(NICE)_
 - [ ] Auth, Sign and Encrypt Subkeys are stored on a smartcard device _(NICE)_
 - [ ] SSH is configured to use PGP Auth key as ssh private key _(NICE)_
