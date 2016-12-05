@@ -59,65 +59,6 @@ Remember, these are only guidelines. If you feel these priority levels do not
 reflect your project's commitment to security, you should adjust them as you
 see fit.
 
-### Checklist
-
-- [ ] System supports SecureBoot _(ESSENTIAL)_
-- [ ] System has no firewire, thunderbolt or ExpressCard ports _(NICE)_
-- [ ] System has a TPM chip _(NICE)_
-
-### Considerations
-
-#### SecureBoot
-
-Despite its controversial nature, SecureBoot offers prevention against many
-attacks targeting workstations (Rootkits, "Evil Maid," etc), without
-introducing too much extra hassle. It will not stop a truly dedicated attacker,
-plus there is a pretty high degree of certainty that state security agencies
-have ways to defeat it (probably by design), but having SecureBoot is better
-than having nothing at all.
-
-Alternatively, you may set up [Anti Evil Maid][1] which offers a more
-wholesome protection against the type of attacks that SecureBoot is supposed
-to prevent, but it will require more effort to set up and maintain.
-
-#### TPM Chip
-
-Trusted Platform Module (TPM) is a crypto chip bundled with the motherboard
-separately from the core processor, which can be used for additional platform
-security (such as to store full-disk encryption keys), but is not normally used
-for day-to-day workstation operation. At best, this is a nice-to-have, unless
-you have a specific need to use TPM for your workstation security.
-
-## Pre-boot environment
-
-This is a set of recommendations for your workstation before you even start
-with OS installation.
-
-### Checklist
-
-- [ ] UEFI boot mode is used (not legacy BIOS) _(ESSENTIAL)_
-- [ ] Password is required to enter UEFI configuration _(ESSENTIAL)_
-- [ ] SecureBoot is enabled _(ESSENTIAL)_
-
-### Considerations
-
-#### UEFI and SecureBoot
-
-UEFI, with all its warts, offers a lot of goodies that legacy BIOS doesn't,
-such as SecureBoot. Most modern systems come with UEFI mode on by default.
-
-Make sure a strong password is required to enter UEFI configuration mode. Pay
-attention, as many manufacturers quietly limit the length of the password you
-are allowed to use, so you may need to choose high-entropy short passwords vs.
-long passphrases (see below for more on passphrases).
-
-Depending on the Linux distribution you decide to use, you may or may not have
-to jump through additional hoops in order to import your distribution's
-SecureBoot key that would allow you to boot the distro. Many distributions have
-partnered with Microsoft to sign their released kernels with a key that is
-already recognized by most system manufacturers, therefore saving you the
-trouble of having to deal with key importing.
-
 ## Distro choice considerations
 
 Chances are you'll stick with a fairly widely-used distribution such as Fedora,
@@ -247,7 +188,6 @@ distinct, robust, equally strong passphrases you will need to remember:
 **User-level**, used for the following:
 
 - User account and sudo
-- Master password for the password manager
 
 All of them, obviously, can be different if there is a compelling reason.
 
@@ -262,8 +202,6 @@ document such as this one. However, here are some steps you should take:
 - [ ] Check your firewalls to ensure all incoming ports are filtered _(ESSENTIAL)_
 - [ ] Make sure root mail is forwarded to an account you check _(ESSENTIAL)_
 - [ ] Set up an automatic OS update schedule, or update reminders _(ESSENTIAL)_
-- [ ] Check to ensure sshd service is disabled by default _(NICE)_
-- [ ] Configure the screensaver to auto-lock after a period of inactivity _(NICE)_
 
 ### Considerations
 
@@ -282,82 +220,12 @@ gets delivered, as some email providers will reject email coming in from
 nonexistent or non-routable domain names. If that is the case, you will need to
 play with your mail forwarding configuration until this actually works.
 
-#### Firewalls, sshd, and listening daemons
-
-The default firewall settings will depend on your distribution, but many of
-them will allow incoming `sshd` ports. Unless you have a compelling legitimate
-reason to allow incoming ssh, you should filter that out and disable the `sshd`
-daemon.
-
-    systemctl disable sshd.service
-    systemctl stop sshd.service
-
-You can always start it temporarily if you need to use it.
-
-In general, your system shouldn't have any listening ports apart from
-responding to ping. This will help safeguard you against network-level 0-day
-exploits.
-
 ## Best practices
 
 What follows is a curated list of best practices that we think you should
 adopt. It is most certainly non-exhaustive, but rather attempts to offer
 practical advice that strikes a workable balance between security and overall
 usability.
-
-### Password managers
-
-#### Checklist
-
-- [ ] Use a password manager _(ESSENTIAL)_
-- [ ] Use unique passwords on unrelated sites _(ESSENTIAL)_
-- [ ] Use a password manager that supports team sharing _(NICE)_
-
-#### Considerations
-
-Using good, unique passwords should be a critical requirement for every member
-of your team. Credential theft is happening all the time -- either via
-compromised computers, stolen database dumps, remote site exploits, or any
-number of other means. No credentials should ever be reused across sites,
-especially for critical applications.
-
-##### In-browser password manager
-
-Every browser has a mechanism for saving passwords that is fairly secure and
-can sync with vendor-maintained cloud storage while keeping the data encrypted
-with a user-provided passphrase. However, this mechanism has important
-disadvantages:
-
-1. It does not work across browsers
-2. It does not offer any way of sharing credentials with team members
-
-There are several well-supported, free-or-cheap password managers that are
-well-integrated into multiple browsers, work across platforms, and offer
-group sharing (usually as a paid service). Solutions can be easily found via
-search engines.
-
-##### Standalone password manager
-
-One of the major drawbacks of any password manager that comes integrated with
-the browser is the fact that it's part of the application that is most likely
-to be attacked by intruders. If this makes you uncomfortable (and it should),
-you may choose to have two different password managers -- one for websites
-that is integrated into your browser, and one that runs as a standalone
-application. The latter can be used to store high-risk credentials such as
-root passwords, database passwords, other shell account credentials, etc.
-
-It may be particularly useful to have such tool for sharing superuser account
-credentials with other members of your team (server root passwords, ILO
-passwords, database admin passwords, bootloader passwords, etc).
-
-A few tools can help you:
-
-- [KeePassX][8], which improves team sharing in version 2
-- [Pass][9], which uses text files and PGP and integrates with git
-- [Django-Pstore][10], which uses GPG to share credentials between admins
-- [Hiera-Eyaml][11], which, if you are already using Puppet for your
-  infrastructure, may be a handy way to track your server/service credentials
-  as part of your encrypted Hiera data store
 
 ### Securing SSH and PGP private keys
 
@@ -370,8 +238,6 @@ to ensure that your private keys are well protected against theft.
 #### Checklist
 
 - [ ] Strong passphrases are used to protect private keys _(ESSENTIAL)_
-- [ ] PGP Master key is stored on removable storage _(NICE)_
-- [ ] Auth, Sign and Encrypt Subkeys are stored on a smartcard device _(NICE)_
 - [ ] SSH is configured to use PGP Auth key as ssh private key _(NICE)_
 
 #### Considerations
@@ -400,14 +266,6 @@ Yubikey NEO.
 If you are not willing to go that far, at least make sure you have a strong
 passphrase on both your PGP private key and your SSH private key, which will
 make it harder for attackers to steal and use them.
-
-### Hibernate or shut down, do not suspend
-
-When a system is suspended, the RAM contents are kept on the memory chips and
-can be read by an attacker (known as the [Cold Boot Attack][17]). If you are
-going away from your system for an extended period of time, such as at the end
-of the day, it is best to shut it down or hibernate it instead of suspending
-it or leaving it on.
 
 ### SELinux on the workstation
 
