@@ -240,33 +240,6 @@ to ensure that your private keys are well protected against theft.
 - [ ] Strong passphrases are used to protect private keys _(ESSENTIAL)_
 - [ ] SSH is configured to use PGP Auth key as ssh private key _(NICE)_
 
-#### Considerations
-
-The best way to prevent private key theft is to use a smartcard to store your
-encryption private keys and never copy them onto the workstation. There are
-several manufacturers that offer OpenPGP capable devices:
-
-- [Kernel Concepts][12], where you can purchase both the OpenPGP compatible
-  smartcards and the USB readers, should you need one.
-- [Yubikey NEO][13], which offers OpenPGP smartcard functionality in addition
-  to many other cool features (U2F, PIV, HOTP, etc).
-
-It is also important to make sure that the master PGP key is not stored on the
-main workstation, and only subkeys are used. The master key will only be
-needed when signing someone else's keys or creating new subkeys -- operations
-which do not happen very frequently. You may follow [the Debian's subkeys][14]
-guide to learn how to move your master key to removable storage and how to
-create subkeys.
-
-You should then configure your gnupg agent to act as ssh agent and use the
-smartcard-based PGP Auth key to act as your ssh private key. We publish a
-[detailed guide][15] on how to do that using either a smartcard reader or a
-Yubikey NEO.
-
-If you are not willing to go that far, at least make sure you have a strong
-passphrase on both your PGP private key and your SSH private key, which will
-make it harder for attackers to steal and use them.
-
 ### SELinux on the workstation
 
 If you are using a distribution that comes bundled with SELinux (such as
