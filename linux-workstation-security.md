@@ -231,26 +231,6 @@ adopt. It is most certainly non-exhaustive, but rather attempts to offer
 practical advice that strikes a workable balance between security and overall
 usability.
 
-### Use Fido U2F for website 2-factor authentication
-
-[Fido U2F][22] is a standard developed specifically to provide a mechanism for
-2-factor authentication *and* combat credential phishing. Regular OTP
-(one-time password) mechanisms are ineffective in the case where the attacker
-is able to trick you into submitting your password and token into a malicious
-site masquerading as a legitimate service. The U2F protocol will store site
-authentication data on the USB token that will prevent you from accidentally
-giving an attacker both your password and your one-time token if you try to
-use it on anything other than the legitimate website.
-
-See this site for a curated list of services providing Fido U2F support:
-
-- [dongleauth.info][23]
-
-Note, that not all browsers currently support U2F-capable hardware tokens, and
-if you use sandboxes or virtualization-based isolation around your browser,
-you may have to work extra hard to enable USB pass-through from the
-application to your USB token.
-
 ### Securing SSH and PGP private keys
 
 Personal encryption keys, including SSH and PGP private keys, are going to be
